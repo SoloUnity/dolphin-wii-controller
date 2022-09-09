@@ -4,8 +4,7 @@ Video games were meant to be played together. All you need to play a game with f
 
 | macOS Server | iOS Client | iOS Server Browser |
 | ------------ | ---------- | ------------------ |
-| <img src="https://user-images.githubusercontent.com/329222/130981252-d7fdad99-8b32-437f-aefd-eb1198613549.png" alt="Server UI" /> | ![IMG_A12DABFCDD71-1](https://user-images.githubusercontent.com/77747704/189273859-9e9540b9-ce6d-4016-b899-b7d814de0d13.jpeg)
- | ![Server Join UI](https://user-images.githubusercontent.com/329222/131947834-1a5de0b6-9a95-46bd-95a4-b4afc0aa7ccc.PNG) |
+| <img src="https://user-images.githubusercontent.com/329222/130981252-d7fdad99-8b32-437f-aefd-eb1198613549.png" alt="Server UI" /> | ![IMG_A12DABFCDD71-1](https://user-images.githubusercontent.com/77747704/189273859-9e9540b9-ce6d-4016-b899-b7d814de0d13.jpeg) | ![Server Join UI](https://user-images.githubusercontent.com/329222/131947834-1a5de0b6-9a95-46bd-95a4-b4afc0aa7ccc.PNG) |
 
 ## To-Do
 Add shake detection via gyroscope
