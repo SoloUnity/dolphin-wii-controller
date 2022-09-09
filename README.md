@@ -4,12 +4,17 @@ Video games were meant to be played together. All you need to play a game with f
 
 | macOS Server | iOS Client | iOS Server Browser |
 | ------------ | ---------- | ------------------ |
-| <img src="https://user-images.githubusercontent.com/329222/130981252-d7fdad99-8b32-437f-aefd-eb1198613549.png" alt="Server UI" /> | ![Client UI](https://user-images.githubusercontent.com/329222/131947045-28fb3a63-58fe-47e7-a7b8-e3f4a365dee7.png) | ![Server Join UI](https://user-images.githubusercontent.com/329222/131947834-1a5de0b6-9a95-46bd-95a4-b4afc0aa7ccc.PNG) |
+| <img src="https://user-images.githubusercontent.com/329222/130981252-d7fdad99-8b32-437f-aefd-eb1198613549.png" alt="Server UI" /> | ![IMG_A12DABFCDD71-1](https://user-images.githubusercontent.com/77747704/189273859-9e9540b9-ce6d-4016-b899-b7d814de0d13.jpeg)
+ | ![Server Join UI](https://user-images.githubusercontent.com/329222/131947834-1a5de0b6-9a95-46bd-95a4-b4afc0aa7ccc.PNG) |
+
+## To-Do
+Add shake detection via gyroscope
+Modify macOS server
 
 ## Installation & Usage
 
 1. [Download the latest version of Dolphin emulator](https://dolphin-emu.org)
-2. [Install the iOS app from the App Store](https://apps.apple.com/us/app/dolphin-ctrl/id1584272645) and the [macOS server from GitHub](https://github.com/apexskier/dolphin-controller/releases/latest) (or build and run the with XCode)
+2. Build app from source code (Could add to the app store if there is enough demand)
 3. From the iOS app, tap "Join" and find your server
 4. Pick a controller number by tapping P1, P2, P3, or P4
 
@@ -35,5 +40,3 @@ You can verify the controller is connected by clicking "Configure" and ensuring 
 * In the server browser window (after tapping "Join") the ★'d server is the one last connected to.
 * Servers are advertised automatically with Bonjour, so no need to enter manual information if everyone's in the same room.
 * For remote play, tap the Network icon in the macOS app's toolbar to find the port, forward to a public IP address, and enter the address manually.
-
-❤️ inspired by (and originally forked from, but since rewritten) https://github.com/ajaymerchia/dolphin-controller
