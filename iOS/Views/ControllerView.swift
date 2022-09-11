@@ -1,5 +1,28 @@
 import SwiftUI
 
+
+
+
+//  Override the default behavior of shake gestures to send our notification instead.
+extension UIWindow {
+     open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+         @EnvironmentObject var client: Client
+        if motion == .motionShake {
+            client.send("PRESS Z")
+        }
+     }
+    
+    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        @EnvironmentObject var client: Client
+       if motion == .motionShake {
+           
+           client.send("PRESS Z")
+       }
+    }
+
+}
+
+
 private struct PressButton<Label>: View where Label: View {
     @EnvironmentObject private var client: Client
 
@@ -61,175 +84,301 @@ struct ControllerView<PlayerIndicators, AppButtons>: View where PlayerIndicators
 
     var body: some View {
         HStack {
-            VStack(alignment: .center) {
-                Joystick(
-                    identifier: "MAIN",
-                    color: Color(red: 221/256, green: 218/256, blue: 231/256),
-                    diameter: 150,
-                    knobDiameter: 110,
-                    label: ZStack {
-                        MainJoystickRidge()
-                            .frame(width: 30, height: 30)
-                        MainJoystickRidge()
-                            .frame(width: 60, height: 60)
-                        MainJoystickRidge()
-                            .frame(width: 90, height: 90)
-                    },
-                    hapticsSharpness: 0.8
-                )
-
-                Spacer()
-
-                ZStack {
-                    PressButton(label: Image(systemName: "arrowtriangle.up.fill"), identifier: "D_UP")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 42,
-                            height: 42,
-                            shape: RoundedRectangle(cornerRadius: 4)
-                        ))
-                        .position(x: 42*1.5, y: 42*0.5)
-                    PressButton(label: Image(systemName: "arrowtriangle.down.fill"), identifier: "D_DOWN")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 42,
-                            height: 42,
-                            shape: RoundedRectangle(cornerRadius: 4)
-                        ))
-                        .position(x: 42*1.5, y: 42*2.5)
-                    PressButton(label: Image(systemName: "arrowtriangle.left.fill"), identifier: "D_LEFT")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 42,
-                            height: 42,
-                            shape: RoundedRectangle(cornerRadius: 4)
-                        ))
-                        .position(x: 42*0.5, y: 42*1.5)
-                    PressButton(label: Image(systemName: "arrowtriangle.right.fill"), identifier: "D_RIGHT")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 42,
-                            height: 42,
-                            shape: RoundedRectangle(cornerRadius: 4)
-                        ))
-                        .position(x: 42*2.5, y: 42*1.5)
-                }
-                .frame(width: 42*3, height: 42*3)
-            }
-            .frame(width: 200)
-
-            Spacer()
-
-            VStack {
-                Spacer()
-
-                VStack(spacing: 8) {
-                    HStack {
-                        PressButton(label: Text("L"), identifier: "L")
+            
+            
+            ZStack {
+                
+                HStack {
+                    ZStack {
+                        PressButton(label: Image(systemName: "arrowtriangle.up.fill"), identifier: "D_UP")
                             .buttonStyle(GCCButton(
                                 color: GameCubeColors.lightGray,
-                                width: 100,
+                                width: 42,
                                 height: 42,
-                                shape: RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                shape: RoundedRectangle(cornerRadius: 4)
                             ))
-                        Spacer()
-                        PressButton(label: Text("R"), identifier: "R")
+                            .position(x: 42*1.5, y: 42*0.5)
+                        PressButton(label: Image(systemName: "arrowtriangle.down.fill"), identifier: "D_DOWN")
                             .buttonStyle(GCCButton(
                                 color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*1.5, y: 42*2.5)
+                        PressButton(label: Image(systemName: "arrowtriangle.left.fill"), identifier: "D_LEFT")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*0.5, y: 42*1.5)
+                        PressButton(label: Image(systemName: "arrowtriangle.right.fill"), identifier: "D_RIGHT")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*2.5, y: 42*1.5)
+                    }
+                    .frame(width: 42*3, height: 42*3)
+                    .padding()
+                    
+                    
+                    PressButton(label: Text("A"), identifier: "A")
+                        .buttonStyle(GCCButton(
+                            color: GameCubeColors.green,
+                            width: 80,
+                            height: 80
+                        ))
+                    
+                    
+                    
+                    Spacer()
+                    
+                    PressButton(label: Text("1"), identifier: "Y")
+                        .buttonStyle(GCCButton(
+                            color: GameCubeColors.green,
+                            width: 80,
+                            height: 80
+                        ))
+                    
+                    PressButton(label: Text("2"), identifier: "X")
+                        .buttonStyle(GCCButton(
+                            color: GameCubeColors.green,
+                            width: 80,
+                            height: 80
+                        ))
+                        .padding(.horizontal)
+                }
+                
+                VStack {
+                    PressButton(label: Text("+"), identifier: "L")
+                        .buttonStyle(GCCButton(
+                            color: GameCubeColors.lightGray,
+                            width: 45,
+                            height: 45
+                        ))
+                    PressButton(label: Image(systemName: "house"), identifier: "START")
+                        .buttonStyle(GCCButton(
+                            color: GameCubeColors.lightGray,
+                            width: 45,
+                            height: 45
+                        ))
+                    PressButton(label: Text("-"), identifier: "R")
+                        .buttonStyle(GCCButton(
+                            color: GameCubeColors.lightGray,
+                            width: 45,
+                            height: 45
+                        ))
+                    
+                }
+                
+                
+                VStack {
+                    HStack {
+                        
+                        playerIndicators
+                        
+                        Spacer()
+                        
+                        PressButton(label: Text("B"), identifier: "B")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                shape: Capsule(style: .continuous),
+                                fontSize: 20
+                            ))
+                            
+                        
+                        appButtons
+                        
+                    }
+                    
+                    Spacer()
+                }
+            }
+            
+            
+
+
+            /*
+            HStack {
+                VStack(alignment: .center) {
+                    Joystick(
+                        identifier: "MAIN",
+                        color: Color(red: 221/256, green: 218/256, blue: 231/256),
+                        diameter: 150,
+                        knobDiameter: 110,
+                        label: ZStack {
+                            MainJoystickRidge()
+                                .frame(width: 30, height: 30)
+                            MainJoystickRidge()
+                                .frame(width: 60, height: 60)
+                            MainJoystickRidge()
+                                .frame(width: 90, height: 90)
+                        },
+                        hapticsSharpness: 0.8
+                    )
+
+                    Spacer()
+
+                    ZStack {
+                        PressButton(label: Image(systemName: "arrowtriangle.up.fill"), identifier: "D_UP")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*1.5, y: 42*0.5)
+                        PressButton(label: Image(systemName: "arrowtriangle.down.fill"), identifier: "D_DOWN")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*1.5, y: 42*2.5)
+                        PressButton(label: Image(systemName: "arrowtriangle.left.fill"), identifier: "D_LEFT")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*0.5, y: 42*1.5)
+                        PressButton(label: Image(systemName: "arrowtriangle.right.fill"), identifier: "D_RIGHT")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 42,
+                                height: 42,
+                                shape: RoundedRectangle(cornerRadius: 4)
+                            ))
+                            .position(x: 42*2.5, y: 42*1.5)
+                    }
+                    .frame(width: 42*3, height: 42*3)
+                }
+                .frame(width: 200)
+                 
+                Spacer()
+
+                VStack {
+                    Spacer()
+
+                    VStack(spacing: 8) {
+                        HStack {
+                            PressButton(label: Text("L"), identifier: "L")
+                                .buttonStyle(GCCButton(
+                                    color: GameCubeColors.lightGray,
+                                    width: 100,
+                                    height: 42,
+                                    shape: RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                ))
+                            Spacer()
+                            PressButton(label: Text("R"), identifier: "R")
+                                .buttonStyle(GCCButton(
+                                    color: GameCubeColors.lightGray,
+                                    width: 100,
+                                    height: 42,
+                                    shape: RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                ))
+                        }
+                        PressButton(label: Text("Z"), identifier: "Z")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.zColor,
                                 width: 100,
                                 height: 42,
                                 shape: RoundedRectangle(cornerRadius: 4, style: .continuous)
                             ))
                     }
-                    PressButton(label: Text("Z"), identifier: "Z")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.zColor,
-                            width: 100,
-                            height: 42,
-                            shape: RoundedRectangle(cornerRadius: 4, style: .continuous)
-                        ))
-                }
-                .frame(
-                    minWidth: 0,
-                    maxWidth: .infinity,
-                    alignment: .center
-                )
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity,
+                        alignment: .center
+                    )
 
-                Spacer()
+                    Spacer()
 
-                playerIndicators
+                    playerIndicators
 
-                Spacer()
+                    Spacer()
 
-                VStack(spacing: 4) {
-                    Text("START/PAUSE").gcLabel(size: 16)
-                    PressButton(label: Text(""), identifier: "START")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 34,
-                            height: 34,
-                            shape: Circle()
-                        ))
-                        .accessibilityLabel(Text("START/PAUSE"))
+                    VStack(spacing: 4) {
+                        Text("START/PAUSE").gcLabel(size: 16)
+                        PressButton(label: Text(""), identifier: "START")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 34,
+                                height: 34,
+                                shape: Circle()
+                            ))
+                            .accessibilityLabel(Text("START/PAUSE"))
+                    }
+
+                    Spacer()
+
+                    appButtons
                 }
 
                 Spacer()
 
-                appButtons
+                VStack {
+                    ZStack {
+                        PressButton(label: Text("A"), identifier: "A")
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.green,
+                                width: 120,
+                                height: 120
+                            ))
+                        PressButton(label: Text("B").rotationEffect(.degrees(-60)), identifier: "B")
+                            .offset(x: 0, y: 60 + 12 + 30)
+                            .rotationEffect(.degrees(60))
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.red,
+                                width: 60,
+                                height: 60
+                            ))
+                        PressButton(label: Text("Y").rotationEffect(.degrees(-175)), identifier: "Y")
+                            .offset(x: 0, y: 60 + 12 + 21)
+                            .rotationEffect(.degrees(175))
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 80,
+                                height: 42,
+                                shape: Capsule(style: .continuous)
+                            ))
+                        PressButton(label: Text("X").rotationEffect(.degrees(-260)), identifier: "X")
+                            .offset(x: 0, y: 60 + 12 + 21)
+                            .rotationEffect(.degrees(260))
+                            .buttonStyle(GCCButton(
+                                color: GameCubeColors.lightGray,
+                                width: 80,
+                                height: 42,
+                                shape: Capsule(style: .continuous)
+                            ))
+                    }
+                    .offset(y: 20)
+                    .frame(height: 120 + 60)
+
+                    Spacer()
+
+                    Joystick(
+                        identifier: "C",
+                        color: GameCubeColors.yellow,
+                        diameter: 150,
+                        knobDiameter: 80,
+                        label: Text("C").gcLabel(),
+                        hapticsSharpness: 0.8
+                    )
+                    
+                }
+                .frame(width: 200)
             }
-
-            Spacer()
-
-            VStack {
-                ZStack {
-                    PressButton(label: Text("A"), identifier: "A")
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.green,
-                            width: 120,
-                            height: 120
-                        ))
-                    PressButton(label: Text("B").rotationEffect(.degrees(-60)), identifier: "B")
-                        .offset(x: 0, y: 60 + 12 + 30)
-                        .rotationEffect(.degrees(60))
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.red,
-                            width: 60,
-                            height: 60
-                        ))
-                    PressButton(label: Text("Y").rotationEffect(.degrees(-175)), identifier: "Y")
-                        .offset(x: 0, y: 60 + 12 + 21)
-                        .rotationEffect(.degrees(175))
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 80,
-                            height: 42,
-                            shape: Capsule(style: .continuous)
-                        ))
-                    PressButton(label: Text("X").rotationEffect(.degrees(-260)), identifier: "X")
-                        .offset(x: 0, y: 60 + 12 + 21)
-                        .rotationEffect(.degrees(260))
-                        .buttonStyle(GCCButton(
-                            color: GameCubeColors.lightGray,
-                            width: 80,
-                            height: 42,
-                            shape: Capsule(style: .continuous)
-                        ))
-                }
-                .offset(y: 20)
-                .frame(height: 120 + 60)
-
-                Spacer()
-
-                Joystick(
-                    identifier: "C",
-                    color: GameCubeColors.yellow,
-                    diameter: 150,
-                    knobDiameter: 80,
-                    label: Text("C").gcLabel(),
-                    hapticsSharpness: 0.8
-                )
-            }
-            .frame(width: 200)
+             */
+            
+            
         }
     }
 }

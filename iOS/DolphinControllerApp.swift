@@ -13,7 +13,7 @@ struct DolphinControllerApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                GameCubeColors.purple.ignoresSafeArea()
+                Color(red: 40/256, green: 40/256, blue: 40/256).ignoresSafeArea()
                 ContentView(
                     shouldAutoReconnect: $shouldAutoReconnect
                 )

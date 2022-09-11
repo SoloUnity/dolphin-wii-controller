@@ -17,9 +17,14 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if showPing {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading) {
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        
                         PingView(ping: self.ping)
+                            .padding(.top)
+                        
                         Spacer()
                     }
                     Spacer()
